@@ -1,0 +1,7 @@
+py7zr
+dictor
+pysftp
+pyyaml
+fs
+python-gnupg
+jinja2

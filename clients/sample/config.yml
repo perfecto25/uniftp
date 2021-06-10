@@ -1,0 +1,35 @@
+prod:
+  action: push
+  host: ftp1.customer.com
+  username: ftptest     
+  auth_type: password
+  password: mySuperPASSWORD123
+  enc_type: gpg
+  gpg_key: customerA.asc
+  enc_password: abracadabraGPG
+  remote_path: /prod_uploads  # push your file to remote server, to this remote path
+  file_prefix: from_me_  # append a prefix to any file that you push to remote
+  delete_encrypted_files: 'true'  # delete all generated encrypted files (does not delete your unencrypted original file!)
+
+
+dev:
+  action: push
+  host: ftp2.customer.com
+  username: ftptest     
+  auth_type: key
+  privkey: id_rsa
+  enc_type: 7zip
+  enc_password: abracadabra7zip
+  remote_path: /dev_uploads
+  file_prefix: from_me_
+  delete_encrypted_files: 'true'
+
+
+## example pulling file from remote to local
+uat:
+  action: pull  # pull a file from remote to local
+  host: ftp3.customer.com
+  username: ftptest     
+  auth_type: key
+  privkey: id_rsa
+  local_path: /tmp  # this will download file from client to local /tmpddd
