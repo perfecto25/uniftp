@@ -146,3 +146,9 @@ open up uniftp/globals.py and enable email
 
     EMAIL_ON_ERROR = True
     EMAIL_TO = 'admin@company.com'
+
+---
+
+to see all options, run HELP
+
+    ./ftp.py --help
