@@ -44,7 +44,6 @@ Create a service account for UniFTP,
 
 this will create a uniftp user account which will store connectivity settings for each FTP connection
 
-
 Update folder permissions to match the service account
 
     chown -R uniftp:uniftp /opt/uniftp
@@ -191,6 +190,18 @@ open up uniftp/globals.py and enable email
 
     EMAIL_ON_ERROR = True
     EMAIL_TO = 'admin@company.com'
+
+---
+
+### Logging
+
+UniFTP will log all FTP transactions into /opt/uniftp/ftp.log file,
+
+    [INFO] 2021-06-11 12:17:06,797 >> pushing to client: clientA, file: /mnt/s3/reports/clientA/file.csv, env: uat
+    [INFO] 2021-06-11 12:17:09,332 >> files on target host: None
+
+    [INFO] 2021-06-11 12:22:01,393 >> pushing to client: clientB, file: /mnt/s3/reports/clientB/somefile.csv, env: test
+    [INFO] 2021-06-11 12:22:03,132 >> files on target host: None
 
 ---
 
