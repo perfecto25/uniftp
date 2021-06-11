@@ -138,6 +138,14 @@ to check what files are present on a client's remote side, or to test basic conn
 
 ---
 
+### to send multiple files or folders
+
+you can push multiple files or folders to the remote server by passing a comma separated string,
+
+    ./ftp.py -c clientName -e envName -f file1,file2,dir1,dir2
+
+---
+
 ### Alert on Error
 
 UniFTP can email you if theres an error during an FTP process.
