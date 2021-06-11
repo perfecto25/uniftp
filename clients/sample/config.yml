@@ -32,4 +32,4 @@ uat:
   username: ftptest     
   auth_type: key
   privkey: id_rsa
-  local_path: /tmp  # this will download file from client to local /tmpddd
+  local_path: /tmp  # this will download file from client to local /tmp

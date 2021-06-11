@@ -130,6 +130,14 @@ the keys will be imported by uniftp
 
 ---
 
+### check files on remote server
+
+to check what files are present on a client's remote side, or to test basic connectivity to your client:
+
+    ./ftp.py -c clientName -e envName --list (or -l)
+
+---
+
 ### Alert on Error
 
 UniFTP can email you if theres an error during an FTP process.
