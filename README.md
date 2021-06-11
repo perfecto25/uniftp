@@ -127,6 +127,8 @@ SSH keypair can either be external, ie `/home/user/.ssh/id_rsa `
 
 or be placed in `clients/client/sshkeys/`
 
+When UniFTP connects to a remote client, it will append the client's server signature into a known_hosts file (/opt/uniftp/known_hosts)
+
 ---
 
 ### Encryption
