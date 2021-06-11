@@ -44,6 +44,11 @@ Create a service account for UniFTP,
 
 this will create a uniftp user account which will store connectivity settings for each FTP connection
 
+
+Update folder permissions to match the service account
+
+    chown -R uniftp:uniftp /opt/uniftp
+
 ---
 
 ## Configuration
