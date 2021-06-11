@@ -19,11 +19,11 @@ UniFTP can
 git clone this repo
 
     cd /opt
-    git clone repo
+    git clone git@github.com:perfecto25/uniftp.git
 
 create Virtual Env and install requirements
 
-    cd uniftp
+    cd /opt/uniftp
     python3 -m venv venv
     source venv/bin/activate
     python3 -m pip install --upgrade pip
@@ -37,15 +37,22 @@ update ftp.py shebang to point to the python3 directory where this repo is sitti
 
     #!/opt/uniftp/venv/bin/python3
 
+Create a service account for UniFTP,
+
+    groupadd -g 8670 uniftp (or provide a unique GID)
+    useradd -d /opt/uniftp -u 8670 -g 8670 uniftp
+
+this will create a uniftp user account which will store connectivity settings for each FTP connection
+
 ---
 
 ## Configuration
 
 UniFTP works by reading a YAML config file for each target you want to connect to.
 
-To generate a sample client config in order to connect to a client
+To generate a sample client config in order to connect to a client, login as 'uniftp' user and run
 
-    ./ftp.py -c someClient --generate
+    uniftp@localhost> ./ftp.py -c someClient --generate
 
 This will create a new configuration file in clients/someClient/config.yaml
 
@@ -122,11 +129,20 @@ or be placed in `clients/client/sshkeys/`
 
 ---
 
-### GPG encryption
+### Encryption
 
-place client GPG asc keys into `clients/CLIENT/gpgkeys` folder
+UniFTP can encrypt your files with 7zip or GPG encryption
 
-the keys will be imported by uniftp
+for 7zip, simply provide the 7zip password in the config.yaml file,
+
+    enc_type: 7zip
+    enc_password: 7zipSecretPassword
+
+for GPG encryption, place client GPG asc keys into `clients/CLIENT/gpgkeys` folder
+
+    /opt/uniftp/clients/CLIENT/gpgkeys/somekey.asc
+
+the keys will be imported by uniftp during run time
 
 ---
 
@@ -134,7 +150,7 @@ the keys will be imported by uniftp
 
 to check what files are present on a client's remote side, or to test basic connectivity to your client:
 
-    ./ftp.py -c clientName -e envName --list (or -l)
+    uniftp@localhost> ./ftp.py -c clientName -e envName --list (or -l)
 
 ---
 
@@ -142,9 +158,23 @@ to check what files are present on a client's remote side, or to test basic conn
 
 you can push multiple files or folders to the remote server by passing a comma separated string,
 
-    ./ftp.py -c clientName -e envName -f file1,file2,dir1,dir2
+    uniftp@localhost> ./ftp.py -c clientName -e envName -f file1,file2,dir1,dir2
 
 ---
+
+### Run as another user account
+
+To run UniFTP as another user, for example if some user named 'joe' runs a script that needs to FTP a file,
+
+create a sudoers file that lets Joe access 'uniftp' account,
+
+    vi /etc/sudoers.d/uniftp
+
+    joe ALL=(uniftp) NOPASSWD: ALL
+
+now run the command as Joe;
+
+    joe@localhost> sudo -u uniftp -c "/opt/uniftp/ftp.py -c ClientName -e prod -f /tmp/file1
 
 ### Alert on Error
 
