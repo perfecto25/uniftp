@@ -166,6 +166,26 @@ you can push multiple files or folders to the remote server by passing a comma s
 
     uniftp@localhost> ./ftp.py -c clientName -e envName -f file1,file2,dir1,dir2
 
+
+---
+### Pull files from remote FTP host
+
+to pull a directory or file, specify action as "pull" in config.yaml, specify remote_path and local_path
+
+```
+action: pull
+local_path: /path/to/where/you/want/to/download/dir/to
+remote_path: /path/on/remote/FTP/server/where/file/sits/on
+```
+
+now pull the file,
+
+```
+./ftp.py -c <client> -e <environment>
+```
+Uniftp will create a directory on your Local Path and pull files and folders from Remote path to your local path
+
+
 ---
 
 ### Run as another user account
